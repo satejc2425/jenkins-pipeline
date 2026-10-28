@@ -13,7 +13,12 @@ pipeline{
     stage('Build docker image'){
       steps{
         script{
-          sh "docker rmi -f ${IMAGE_NAME}:${TAG}" || true
+          try{
+             sh "docker rmi -f ${IMAGE_NAME}:${TAG}" || true
+          } catch (Exception e){
+            echo "docker image '${IMAGE_NAME}:${TAG}' not found"
+          }
+         
           sh "docker build -t ${IMAGE_NAME}:${TAG} . "
         }
       }
