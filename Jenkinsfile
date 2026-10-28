@@ -1,9 +1,7 @@
 pipeline{
   agent any
     environment{
-      CONTAINER_NAME = 'myapp-container'
       TAG = 'v1'
-      PORT = '5001'
       IMAGE_NAME = 'myapp'
     }
   stages{
